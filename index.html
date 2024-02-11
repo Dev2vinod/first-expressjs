@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fornt part</title>
+  </head>
+  <body>
+    <h1>Signup</h1>
+
+    <form onsubmit="signup();return false">
+      firstname: <input type="text" name="" id="firstname" /> <br />
+      lastname: <input type="text" name="" id="lastname" /> <br />
+      email: <input type="email" name="" id="email" /> <br />
+      password: <input type="password" name="" id="password" /> <br />
+      Repassword: <input type="password" name="" id="repassword" /> <br />
+
+      <input type="submit" name="" value="Signup" />
+    </form>
+
+    <p id="message"></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+
+      function signup(e){
+            e.preventDefalut();
+
+            var fullname =document.getElementById("fullname").value;
+            var lastname =document.getElementById("lastname").value;
+            var email =document.getElementById("email").value;
+            var password =document.getElementById("password").value;
+            var repassword =document.getElementById("repassword").value;
+            
+            if(password!=repassword){
+                  document.getElementById("message").innerHTML ="password does not match";
+                  return;
+            }
+            axios.post('http://localhost:3000/signup',{
+
+                 firstname:firstname,
+                 lastname :lastname ,
+                 email:email,
+                 password:password,
+                 
+            })
+
+            .then(function (response) {
+                  // handle success
+                 console.log(response.data);
+
+                  document.querySelector("#message").innerHTML =response.message
+                  })
+                       .catch(function (error) {
+                   // handle error
+                   console.log(error.data);
+
+                  document.querySelector("#message").innerHTML =error.message
+
+
+                 })
+
+
+
+
+
+
+
+
+
+                 }
+
+                 // const axios = require('axios');
+
+                       // import axios from 'axios';
+
+                             // Make a request for a user with a given ID
+    </script>
+  </body>
+</html>
